@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use GraphQL\GraphQL as GraphQLGraphQL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Nuwave\Lighthouse\GraphQL;
+// use Nuwave\Lighthouse\GraphQL;
+use Nuwave\Lighthouse\Support\Facades\GraphQL;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();

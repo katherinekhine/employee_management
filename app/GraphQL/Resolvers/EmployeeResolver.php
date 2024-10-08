@@ -8,11 +8,9 @@ class EmployeeResolver
 {
     public function resolveEmployees($root, $args, $context, $info)
     {
-
         if (!auth()->check()) {
             throw new \Exception('Unauthorized');
         }
-
 
         return Employee::all();
     }
@@ -30,11 +28,9 @@ class EmployeeResolver
 
     public function createEmployee($root, $args, $context, $info)
     {
-
         if (!auth()->check()) {
             throw new \Exception('Unauthorized');
         }
-
 
         return Employee::create([
             'name' => $args['name'],
