@@ -1,6 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 return [
+
+    'schema' => [
+        'register' => [
+            base_path('graphql/schema.graphql'),
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Route Configuration
@@ -38,6 +47,8 @@ return [
             // middleware, this delegates auth and permission checks to the field level.
             Nuwave\Lighthouse\Http\Middleware\AttemptAuthentication::class,
 
+            // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+
             // Logs every incoming GraphQL query.
             // Nuwave\Lighthouse\Http\Middleware\LogGraphQLQueries::class,
         ],
@@ -61,7 +72,7 @@ return [
     |
     */
 
-    'guards' => null,
+    'guards' => ['api'],
 
     /*
     |--------------------------------------------------------------------------
@@ -230,13 +241,14 @@ return [
          * Allow clients to query paginated lists without specifying the amount of items.
          * Setting this to `null` means clients have to explicitly ask for the count.
          */
-        'default_count' => null,
+        'default_count' => 15,
 
         /*
          * Limit the maximum amount of items that clients can request from paginated lists.
          * Setting this to `null` means the count is unrestricted.
          */
-        'max_count' => null,
+        'max_count' => 100,
+        'paginator' => true,
     ],
 
     /*

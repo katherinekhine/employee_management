@@ -1,41 +1,70 @@
-"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
-scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
-
-"Indicates what fields are available at the top level of a query operation."
-type Query {
-    "Find a single user by an identifying attribute."
-    user(
-      "Search by primary key."
-      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
-
-      "Search by email address."
-      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
-    ): User @find
-
-    "List multiple users."
-    users(
-      "Filters by name. Accepts SQL LIKE wildcards `%` and `_`."
-      name: String @where(operator: "like")
-    ): [User!]! @paginate(defaultCount: 10)
+type Employee {
+    id: ID!
+    name: String!
+    email: String!
+    phone: String!
+    postiton: String!
+    created_at: DateTime!
+    updated_at: DateTime!
 }
 
-"Account of a person who utilizes this application."
-type User {
-    "Unique primary key."
-    id: ID!
+# type Query {
+#     employees: [Employee!] @all
+#     employee(id: ID! @eq): Employee @find
+# }
 
-    "Non-unique name."
-    name: String!
+type Query {
+    employees: [Employee!]
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@resolveEmployees"
+        )
+    employee(id: ID! @eq): Employee
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@resolveEmployee"
+        )
+}
 
-    "Unique email address."
-    email: String!
+# type Mutation {
+#     createEmployee(
+#         name: String!
+#         email: String!
+#         phone: String!
+#         postiton: String!
+#     ): Employee! @create
+#     updateEmployee(
+#         id: ID!
+#         name: String
+#         email: String
+#         phone: String
+#         postiton: String
+#     ): Employee! @update
+#     deleteEmployee(id: ID! @eq): Employee @delete
+# }
 
-    "When the email was verified."
-    email_verified_at: DateTime
+type Mutation {
+    createEmployee(
+        name: String!
+        email: String!
+        phone: String!
+        postiton: String!
+    ): Employee!
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@createEmployee"
+        )
 
-    "When the account was created."
-    created_at: DateTime!
+    updateEmployee(
+        id: ID!
+        name: String
+        email: String
+        phone: String
+        postiton: String
+    ): Employee!
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@updateEmployee"
+        )
 
-    "When the account was last updated."
-    updated_at: DateTime!
+    deleteEmployee(id: ID! @eq): Employee
+        @field(
+            resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@deleteEmployee"
+        )
 }
