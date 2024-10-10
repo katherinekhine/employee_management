@@ -24,7 +24,8 @@ class EmployeeController extends Controller
     {
         // dd($request->all());
         Excel::import(new EmployeeImport, $request->file('excel_file')->store('temp'));
+        return response()->json(['success' => 'File imported successfully']);
 
-        return redirect()->back();
+        // return redirect()->back();
     }
 }
