@@ -15,7 +15,7 @@ type Employee {
 
 type Query {
     employees: [Employee!]
-        @field(
+        @paginate(
             resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@resolveEmployees"
         )
     employee(id: ID! @eq): Employee

@@ -12,7 +12,11 @@ class EmployeeResolver
             throw new \Exception('Unauthorized');
         }
 
-        return Employee::all();
+        // return Employee::all();
+        $perPage = $args['first'] ?? 10;
+        $page = $args['page'] ?? 1;
+
+        return Employee::paginate($perPage, ['*'], 'page', $page);
     }
 
     public function resolveEmployee($root, $args, $context, $info)
