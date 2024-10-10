@@ -21,3 +21,6 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::get('/export-excel', [EmployeeController::class, 'export']);
+
+Route::get('/import-excel', [EmployeeController::class, 'import_excel']);
+Route::post('/import-excel', [EmployeeController::class, 'import_excel_post']);
