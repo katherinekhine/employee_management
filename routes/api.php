@@ -17,10 +17,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/import-excel', [EmployeeController::class, 'import_excel']);
+    Route::post('/import-excel', [EmployeeController::class, 'import_excel_post']);
+    Route::get('/export-excel', [EmployeeController::class, 'export']);
     // GraphQL::routes();
 });
-
-Route::get('/export-excel', [EmployeeController::class, 'export']);
-
-Route::get('/import-excel', [EmployeeController::class, 'import_excel']);
-Route::post('/import-excel', [EmployeeController::class, 'import_excel_post']);
