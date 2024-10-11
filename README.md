@@ -30,7 +30,7 @@ This project is a backend API server for managing employees, built using Laravel
 2. Navigate to the project directory:
 
     ```bash
-    cd employee-management-system
+    cd employee_management
     ```
 
 3. Install dependencies:
