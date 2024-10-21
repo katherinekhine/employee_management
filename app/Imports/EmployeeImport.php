@@ -25,10 +25,10 @@ class EmployeeImport implements ToCollection, ToModel
             $count = Employee::where('email', '=', $row[1])->count();
             if (empty($count)) {
                 $employee = new Employee();
-                $employee->name = $row[0];
-                $employee->email = $row[1];
-                $employee->phone = $row[2];
-                $employee->postiton = $row[3];
+                $employee->name = $row[1];
+                $employee->email = $row[2];
+                $employee->phone = $row[3];
+                $employee->postiton = $row[4];
                 $employee->save();
             }
         }
