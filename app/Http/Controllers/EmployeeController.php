@@ -12,7 +12,9 @@ class EmployeeController extends Controller
 {
     public function export()
     {
-        return Excel::download(new EmployeesExport, 'employees.xlsx');
+        // return Excel::download(new EmployeesExport, 'employees.xlsx');
+        $file_name = 'employees_' . time() . '.xlsx';
+        return Excel::store(new EmployeesExport, $file_name);
     }
 
     public function import_excel()
