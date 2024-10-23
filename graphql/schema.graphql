@@ -3,7 +3,7 @@ type Employee {
     name: String!
     email: String!
     phone: String!
-    postiton: String!
+    position: String!
     created_at: DateTime!
     updated_at: DateTime!
 }
@@ -29,14 +29,14 @@ type Query {
 #         name: String!
 #         email: String!
 #         phone: String!
-#         postiton: String!
+#         position: String!
 #     ): Employee! @create
 #     updateEmployee(
 #         id: ID!
 #         name: String
 #         email: String
 #         phone: String
-#         postiton: String
+#         position: String
 #     ): Employee! @update
 #     deleteEmployee(id: ID! @eq): Employee @delete
 # }
@@ -46,7 +46,7 @@ type Mutation {
         name: String!
         email: String!
         phone: String!
-        postiton: String!
+        position: String!
     ): Employee!
         @field(
             resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@createEmployee"
@@ -57,7 +57,7 @@ type Mutation {
         name: String
         email: String
         phone: String
-        postiton: String
+        position: String
     ): Employee!
         @field(
             resolver: "App\\GraphQL\\Resolvers\\EmployeeResolver@updateEmployee"

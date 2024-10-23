@@ -13,6 +13,6 @@ class Employee extends Model
         'name',
         'email',
         'phone',
-        'postiton',
+        'position',
     ];
 }

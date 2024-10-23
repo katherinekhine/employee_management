@@ -40,7 +40,7 @@ class EmployeeResolver
             'name' => $args['name'],
             'email' => $args['email'],
             'phone' => $args['phone'],
-            'postiton' => $args['postiton'],
+            'position' => $args['position'],
         ]);
     }
 
@@ -55,7 +55,7 @@ class EmployeeResolver
             'name' => $args['name'] ?? $employee->name,
             'email' => $args['email'] ?? $employee->email,
             'phone' => $args['phone'] ?? $employee->phone,
-            'postiton' => $args['postiton'] ?? $employee->postiton,
+            'position' => $args['position'] ?? $employee->position,
         ]);
 
         return $employee;

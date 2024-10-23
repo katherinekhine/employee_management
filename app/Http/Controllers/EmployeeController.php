@@ -17,7 +17,16 @@ class EmployeeController extends Controller
         // return Excel::download(new EmployeesExport, 'employees.xlsx');
         $file_name = 'employees_' . time() . '.xlsx';
 
-        ExportEmployeesJob::dispatch($file_name);
+        // ExportEmployeesJob::dispatch($file_name);
+
+        $totalRecords = 10000; // Example total records
+        $chunkSize = 2000;
+        $jobs = ceil($totalRecords / $chunkSize);
+
+        for ($i = 0; $i < $jobs; $i++) {
+            $startRow = $i * $chunkSize;
+            ExportEmployeesJob::dispatch($file_name, $startRow);
+        }
 
         return response()->json(['success' => 'Export started, the file will be saved as ' . $file_name]);
         // return Excel::store(new EmployeesExport, $file_name);
